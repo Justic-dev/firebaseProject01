@@ -1,4 +1,4 @@
-import { Image, ImageBackground, StyleSheet, Text, Platform, View, Alert } from 'react-native'
+import { Image, ImageBackground, StyleSheet, Text, Platform, View, Alert, Pressable } from 'react-native'
 import React, { PropsWithChildren, useState } from 'react'
 
 import MyButton from "../components/MyButton";
@@ -6,8 +6,12 @@ import MyTextInput from '../components/MyTextInput';
 import SocialMedia from '../components/SocialMedia';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
+type SignUpScreenProps = PropsWithChildren<{
+  navigation: any;
+}>
 
-const SignUpScreen = () => {
+
+const SignUpScreen = ({navigation}: SignUpScreenProps) => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -15,7 +19,8 @@ const SignUpScreen = () => {
 
 const signupTestFn = () => {
   auth().createUserWithEmailAndPassword(email, password).then(() => {
-    Alert.alert('Signed Up Successfully');
+    // Alert.alert('Signed Up Successfully');
+    navigation.navigate('Login');
   })
   .catch((error) => {
       console.log(error);
@@ -41,8 +46,11 @@ const signupTestFn = () => {
                     <MyTextInput value={email} onChangeText={(text: string) => setEmail(text)} placeholder='Enter E-mail or Username' />
                     <MyTextInput value={password} onChangeText={(text: string) => setPassword(text)} placeholder='Password' secureTextEntry />
                     <MyTextInput value={confirmPassword} onChangeText={(text: string) => setConfirmPassword(text)} placeholder='confirm Password' secureTextEntry />
+                    <Pressable
+                    style={styles.textDontHavec}
+                    onPress={() => (navigation.replace('Login'))}
+                    ><Text style={styles.textDontHave}>Have An Account ?</Text></Pressable>
                     <MyButton title={'Sign Up'} onPress={signupTestFn} />
-
                     <Text style={styles.orText}>Or</Text>
                     <SocialMedia />
                 </View>
@@ -87,10 +95,17 @@ const styles = StyleSheet.create({
         marginTop: 30,
         paddingHorizontal: 20
     },
-    textDontHave: {
+    textDontHavec: {
         alignSelf: 'flex-end',
         marginRight: 10,
         color: '#000000',
+        marginBottom: 15,
+        fontFamily: 'NovaFlat-Regular'
+    },    
+    textDontHave: {
+        alignSelf: 'flex-end',
+        marginRight: 10,
+        color: '#192A56',
         marginBottom: 15,
         fontFamily: 'NovaFlat-Regular'
     },

@@ -2,13 +2,25 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import LoginScreen from './src/screens/LoginScreen'
 import SignUpScreen from './src/screens/SignUpScreen'
+import { NavigationContainer } from '@react-navigation/native'
+import MyStack from './src/navigation/MyStack'
 
 const App = () => {
   return (
-    <SignUpScreen />
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
   )
 }
 
 export default App
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+
+})
