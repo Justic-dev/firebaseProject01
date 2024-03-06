@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "215213722540",
+    "project_id": "react-native-dream-5eb70",
+    "storage_bucket": "react-native-dream-5eb70.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215213722540:android:afde50da44f4f1e2ba0809",
+        "android_client_info": {
+          "package_name": "com.firebaseproject01"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzK5yy6wP6FDElEnDkP8lVHtPs_mCd_Tc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
