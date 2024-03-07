@@ -19,12 +19,20 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
 
 const signupTestFn = () => {
   auth().createUserWithEmailAndPassword(email, password).then(() => {
-    // Alert.alert('Signed Up Successfully');
-    navigation.navigate('Login');
+    Alert.alert('Signed Up Successfully');
+    navigation.replace('Login');
   })
-  .catch((error) => {
-      console.log(error);
-    })
+  .catch(error => {
+    if (error.code === 'auth/email-already-in-use') {
+      Alert.alert('That email address is already in use!');
+    } else if (error.code === 'auth/invalid-email') {
+      Alert.alert('That email address is invalid!');
+    } else if (error.code === 'auth/weak-password') {
+      Alert.alert('That password is too weak!');
+    } 
+    console.log(error);
+  });
+
 }
 
     
@@ -50,7 +58,13 @@ const signupTestFn = () => {
                     style={styles.textDontHavec}
                     onPress={() => (navigation.replace('Login'))}
                     ><Text style={styles.textDontHave}>Have An Account ?</Text></Pressable>
-                    <MyButton title={'Sign Up'} onPress={signupTestFn} />
+                    <MyButton title={'Sign Up'} onPress={() => {
+                      if (password === confirmPassword) {
+                        signupTestFn()
+                      } else {
+                        Alert.alert('Passwords do not match!');
+                      }
+                    }} />
                     <Text style={styles.orText}>Or</Text>
                     <SocialMedia />
                 </View>
